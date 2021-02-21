@@ -1,8 +1,10 @@
 import 'dart:convert';
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:random_color/random_color.dart';
 
 void main() {
   runApp(MaterialApp(home: Home()));
@@ -16,6 +18,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final _toDoController = TextEditingController();
   List _toDoList = [];
+
+  Color corPrincipal = RandomColor().randomColor();
 
   Map<String, dynamic> _lastRemoved;
   int _lastRemovedPos;
@@ -59,6 +63,8 @@ class _HomeState extends State<Home> {
       }
     }
 
+    corPrincipal = RandomColor().randomColor();
+
     setState(() {
       newAFAZER.sort(sortListByTitle);
       newFEITO.sort(sortListByTitle);
@@ -80,7 +86,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: corPrincipal,
         title: Text(
           "LISTA DE TAREFAS",
           style: TextStyle(color: Colors.white),
@@ -98,12 +104,12 @@ class _HomeState extends State<Home> {
                     controller: _toDoController,
                     decoration: InputDecoration(
                       labelText: "Nova Tarefa",
-                      labelStyle: TextStyle(color: Colors.blueAccent),
+                      labelStyle: TextStyle(color: corPrincipal),
                     ),
                   ),
                 ),
                 RaisedButton(
-                  color: Colors.blueAccent,
+                  color: corPrincipal,
                   child: Text("ADD"),
                   textColor: Colors.white,
                   onPressed: () {
@@ -142,7 +148,7 @@ class _HomeState extends State<Home> {
         title: Text(_toDoList[index]["title"]),
         value: _toDoList[index]["ok"],
         secondary: CircleAvatar(
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: corPrincipal,
           child: Icon(_toDoList[index]["ok"] ? Icons.check : Icons.error,
               color: Colors.white),
         ),
@@ -179,7 +185,7 @@ class _HomeState extends State<Home> {
                   });
                 }),
             duration: Duration(seconds: 3),
-            backgroundColor: Colors.lightBlue,
+            backgroundColor: corPrincipal,
           );
 
           Scaffold.of(contexto).removeCurrentSnackBar();

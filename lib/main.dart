@@ -215,7 +215,9 @@ class _HomeState extends State<Home> {
       String b1 = b["title"];
 
       a1 = a1.toLowerCase();
+      a1 = a1.trim();
       b1 = b1.toLowerCase();
+      b1 = b1.trim();
       return a1.compareTo(b1);
     }
   }
